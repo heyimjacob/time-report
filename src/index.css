@@ -2,4 +2,30 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: #F9F9F9;
+}
+
+.App {
+  display: flex;
+}
+
+.app-nav {
+  width: 200px;
+}
+
+.stat-card-sect {
+  display: flex;
+  align-items: center;
+}
+.stat-card {
+  background: white;
+  padding: 30px;
+  width: 260px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+  margin: 0 10px;
+  flex: 30% auto;
+}
+
+.stat-card .stat-value {
+  font-size: 26px;
 }

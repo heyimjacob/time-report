@@ -1,24 +1,59 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+let defaultStyle = {
+  'font-family' : "'Proxima Nova', sans-serif",
+  'color' : '#183851',
+}
 class App extends Component {
-  render() {
+  render () {
     let name = 'Jacob'
     let headerStyle ={
       'color': '#0099ff',
     }
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 style={headerStyle} className="App-title">Hello, {name}</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div style={defaultStyle} className="App">
+        <nav className="app-nav">
+          <h1>Time Report</h1>
+          <UserTab/>
+          <UserTab/>
+          <UserTab/>
+        </nav>
+        <section className="stat-card-sect">
+          <StatisticCard/>
+          <StatisticCard/>
+          <StatisticCard/>
+        </section>
       </div>
-    );
+    )
+  }
+}
+
+class UserTab extends Component {
+  render () {
+    let userName = "Jacob Anderson"
+    let userImage = ""
+    return (
+      <div style={defaultStyle} className="user-tab">
+        <div className="user-image">
+          <img src={userImage}/>
+        </div>
+        <p>{userName}</p>
+      </div>
+    )
+  }
+}
+
+class StatisticCard extends Component {
+  render () {
+    let statValue = '17 hours 3 minutes'
+    let statName = 'Total Hours'
+    return (
+      <div style={defaultStyle} className="stat-card">
+        <p className="stat-value">{statValue}</p>
+        <p className="stat-name">{statName}</p>
+      </div>
+    )
   }
 }
 
