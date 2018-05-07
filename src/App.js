@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+import * as firebase from 'firebase'
+
 
 let defaultStyle = {
-  'font-family' : "'Proxima Nova', sans-serif",
+  'fontFamily' : "'Proxima Nova', sans-serif",
   'color' : '#183851',
 }
 
@@ -23,6 +25,19 @@ let fakeData = {
   }
 }
 
+let settings=  {
+  statCards: {
+    card1: {
+      statName: 'Total Hours',
+      stat: 'test' 
+    },
+    card2: {
+      statName: 'Total Hours',
+      stat: 'test' 
+    },
+  }
+}
+
 class App extends Component {
   constructor() {
     super()
@@ -33,14 +48,15 @@ class App extends Component {
     //Using timeout to immitate loading times
     setTimeout(() => {
       this.setState({
-        data: fakeData
+        fakeData: fakeData,
+        settings: settings
       })
     }, 1000)
   }
   render() {
     return ( 
       <div style={defaultStyle} className="App">
-      {(this.state.data.users) ?
+      {(this.state.fakeData && this.state.settings) ?
       <div>
         <nav className="app-nav">
           <h1>Time Report</h1>
@@ -48,22 +64,25 @@ class App extends Component {
           <UserTab/>
         </nav>
           <section className="stat-card-sect">
-              {console.log(this.state)}
+              {Object.keys(this.state.settings.statCards).map(card => {
+                {console.log('Card: ' +card)}
+                return (
+                <StatCard name={settings.statCards[card].statName} stat={settings.statCards[card].stat}/>)
+              })}
               <StatCard 
                 name='Total Hours'
-                stat={this.state.data.users.user1.billable + this.state.data.users.user1.nonBillable }
+                stat={this.state.fakeData.users.user1.billable + this.state.fakeData.users.user1.nonBillable }
               />
               <StatCard 
                 name='Billable Hours'
-                stat={this.state.data.users.user1.billable}
+                stat={this.state.fakeData.users.user1.billable}
               />
               <StatCard 
                 name='Non-Billable Hours'
-                stat={this.state.data.users.user1.nonBillable}
+                stat={this.state.fakeData.users.user1.nonBillable}
               />
-
           </section>
-          </div>:<h1>Loading...</h1>}
+          </div>:<div className="loader"><h1>Loading...</h1></div>}
       </div>
       )
     }
@@ -97,4 +116,5 @@ class StatCard extends Component {
   }
 }
 
+//https://www.teamwork.com/launchpad/login?redirect_uri=http%3A%2F%2Flocalhost%3A3000
 export default App;
